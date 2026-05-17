@@ -1,4 +1,22 @@
-*{
+.game-mode{
+
+  margin-bottom:20px;
+
+}
+
+.game-mode h3{
+
+  color:white;
+
+  margin-bottom:10px;
+
+}
+
+.game-mode button{
+
+  margin:5px;
+
+}*{
   margin:0;
   padding:0;
   box-sizing:border-box;
