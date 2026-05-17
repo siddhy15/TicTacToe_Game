@@ -1,0 +1,238 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+
+  height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  background:linear-gradient(
+    135deg,
+    #87CEEB,
+    #6A5ACD,
+    #8A2BE2
+  );
+
+  overflow:hidden;
+}
+
+.game-container{
+
+  text-align:center;
+
+  background:rgba(255,255,255,0.15);
+
+  backdrop-filter:blur(10px);
+
+  border:1px solid rgba(255,255,255,0.2);
+
+  padding:30px;
+
+  border-radius:25px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+}
+
+h1{
+
+  color:white;
+
+  margin-bottom:20px;
+
+  font-size:40px;
+
+}
+
+#status{
+
+  color:white;
+
+  font-size:22px;
+
+  font-weight:bold;
+
+  margin-bottom:20px;
+
+}
+
+.choose-player{
+
+  margin-bottom:20px;
+
+}
+
+.choose-player h3{
+
+  color:white;
+
+  margin-bottom:10px;
+
+}
+
+.choose-player button{
+
+  margin:5px;
+
+}
+
+.board{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,110px);
+
+  gap:12px;
+
+  justify-content:center;
+
+}
+
+.cell{
+
+  width:110px;
+  height:110px;
+
+  background:rgba(255,255,255,0.2);
+
+  border-radius:20px;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  font-size:45px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+}
+
+.cell:hover{
+
+  transform:scale(1.08);
+
+  background:rgba(255,255,255,0.35);
+
+}
+
+.x{
+
+  color:#ff4b91;
+
+}
+
+.o{
+
+  color:#00e5ff;
+
+}
+
+button{
+
+  padding:12px 22px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:white;
+
+  color:#6A5ACD;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+}
+
+button:hover{
+
+  transform:scale(1.05);
+
+}
+
+.restart-btn{
+
+  margin-top:20px;
+
+}
+
+/* Popup */
+
+.popup{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0.5);
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+
+}
+
+.popup-content{
+
+  background:white;
+
+  padding:30px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  animation:popupAnim 0.4s ease;
+
+}
+
+.popup-content h2{
+
+  margin-bottom:20px;
+
+  color:#6A5ACD;
+
+}
+
+@keyframes popupAnim{
+
+  from{
+
+    transform:scale(0.5);
+
+    opacity:0;
+
+  }
+
+  to{
+
+    transform:scale(1);
+
+    opacity:1;
+
+  }
+
+}
