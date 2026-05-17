@@ -10,18 +10,20 @@ const popup =
 const winnerText =
   document.getElementById("winnerText");
 
-let humanPlayer = "X";
-
-let robotPlayer = "O";
+/* Game Variables */
 
 let currentPlayer = "X";
 
 let gameActive = true;
 
+let gameMode = "person";
+
 let gameState = [
+
   "", "", "",
   "", "", "",
   "", "", ""
+
 ];
 
 const winningConditions = [
@@ -39,25 +41,23 @@ const winningConditions = [
 
 ];
 
-/* Choose Player */
+/* Select Mode */
 
-function choosePlayer(player){
+function setMode(mode){
 
-  humanPlayer = player;
-
-  robotPlayer =
-    player === "X" ? "O" : "X";
+  gameMode = mode;
 
   restartGame();
 
-  if(robotPlayer === "X"){
-
-    currentPlayer = "X";
+  if(gameMode === "robot"){
 
     statusText.textContent =
-      "🤖 Robot Thinking...";
+      "🤖 Robot Mode Enabled";
 
-    setTimeout(robotMove, 700);
+  } else {
+
+    statusText.textContent =
+      "👥 Two Player Mode";
 
   }
 
@@ -74,22 +74,23 @@ function handleCellClick(e){
 
   if(
     gameState[index] !== "" ||
-    !gameActive ||
-    currentPlayer !== humanPlayer
+    !gameActive
   ){
     return;
   }
 
-  makeMove(index, humanPlayer);
+  makeMove(index, currentPlayer);
 
-  if(gameActive){
-
-    currentPlayer = robotPlayer;
+  if(
+    gameMode === "robot" &&
+    gameActive &&
+    currentPlayer === "O"
+  ){
 
     statusText.textContent =
       "🤖 Robot Thinking...";
 
-    setTimeout(robotMove, 600);
+    setTimeout(robotMove, 500);
 
   }
 
@@ -108,6 +109,18 @@ function makeMove(index, player){
   );
 
   checkWinner();
+
+  if(gameActive){
+
+    currentPlayer =
+      currentPlayer === "X"
+      ? "O"
+      : "X";
+
+    statusText.textContent =
+      `Player ${currentPlayer} Turn`;
+
+  }
 
 }
 
@@ -137,16 +150,7 @@ function robotMove(){
       )
     ];
 
-  makeMove(randomIndex, robotPlayer);
-
-  if(gameActive){
-
-    currentPlayer = humanPlayer;
-
-    statusText.textContent =
-      `Player ${humanPlayer} Turn`;
-
-  }
+  makeMove(randomIndex, "O");
 
 }
 
@@ -183,7 +187,10 @@ function checkWinner(){
 
     gameActive = false;
 
-    if(currentPlayer === robotPlayer){
+    if(
+      gameMode === "robot" &&
+      currentPlayer === "O"
+    ){
 
       winnerText.textContent =
         "🤖 Robot Wins!";
@@ -191,7 +198,7 @@ function checkWinner(){
     } else {
 
       winnerText.textContent =
-        `🏆 Player ${humanPlayer} Wins!`;
+        `🏆 Player ${currentPlayer} Wins!`;
 
     }
 
@@ -218,6 +225,8 @@ function checkWinner(){
 
 function restartGame(){
 
+  currentPlayer = "X";
+
   gameActive = true;
 
   gameState = [
@@ -230,6 +239,9 @@ function restartGame(){
 
   popup.style.display = "none";
 
+  statusText.textContent =
+    "Player X Turn";
+
   cells.forEach(cell => {
 
     cell.textContent = "";
@@ -240,11 +252,6 @@ function restartGame(){
     );
 
   });
-
-  currentPlayer = "X";
-
-  statusText.textContent =
-    `Player ${currentPlayer} Turn`;
 
 }
 
